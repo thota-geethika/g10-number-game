@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number game</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <div id="difficulty-level">
+        <h1 id="choose-msg">Choose difficulty level</h1>
+        <div id="levels-container">
+            <button class="difficulty-button" value="easy" onclick="setInitialValues(value)">Easy</button>
+            <button class="difficulty-button" value="medium" onclick="setInitialValues(value)">Medium</button>
+            <button class="difficulty-button" value="hard" onclick="setInitialValues(value)">Hard</button>
+        </div>
+    </div>
+
+
+    <!-- <h1>Number Guessing Game</h1> -->
+    <div id="container" class="makeDisplayNone">
+        <p id="maxScore" class="container-element score-display-text"></p>
+        <p id="numberRange" class="container-element"></p>
+        <p class="container-element">Can you guess</p>
+
+        <input type="number" id="inputNumber" class="container-element">
+        <button id="guessButton" onclick="guess()" class="container-element">GUESS</button>
+        
+
+
+        <p id="number" class="container-element"></p>
+        <p id="validatingMsg" class="container-element"></p>
+        <p id="remainingGuesses" class="container-element"></p>
+        <p id="score" class="container-element score-display-text makeDisplayNone"></p>
+        <button id="playAgain" onclick="pageRefresh()"  class="container-element makeDisplayNone">Play Again</button>
+
+        
+    </div>
+
+
+    <script>
+        let num;
+        let totalGuesses;
+        let score;
+        let guessesLeft;
+
+        function setInitialValues(level){
+            
+            console.log(document.getElementById("container").classList.add("addStyles"));
+            if( level == "easy")
+            {
+                document.getElementById("numberRange").innerHTML = "The number is between 1-10";
+                num =  Math.ceil((Math.random()*10));
+                totalGuesses = 3;
+                guessesLeft = 3;
+                score = 300;
+                document.getElementById("maxScore").innerHTML = "Max Score: "+ score;
+            }
+            else if(level == "medium")
+            {
+                document.getElementById("numberRange").innerHTML = "The number is between 1-50";
+                num =  Math.ceil((Math.random()*50));
+                totalGuesses = 5;
+                guessesLeft = 5;
+                score = 500;
+                document.getElementById("maxScore").innerHTML = "Max Score: "+ score;
+            }
+            else if(level == "hard")
+            {
+                document.getElementById("numberRange").innerHTML = "The number is between 1-100";
+                num =  Math.ceil((Math.random()*100));
+                totalGuesses = 10;
+                guessesLeft = 10;
+                score = 1000;
+                document.getElementById("maxScore").innerHTML = "Max Score: "+ score;
+            }
+            document.getElementById("difficulty-level").style.display = "none";
+            // document.getElementById("container").style.display = "block";
+
+        }
+
+
+        function lostGame()
+        {
+            document.getElementById("inputNumber").value = "";
+            document.getElementById("validatingMsg").innerHTML = "You couldn't guess the correct number";
+            document.getElementById("remainingGuesses").innerHTML = "No Guesses left!";
+            document.getElementById("number").innerHTML = "The number was " + num;
+            document.getElementById("score").style.display = "block";
+            document.getElementById("score").innerHTML = "Your score: 0";
+            
+
+            //Making the button unclickable
+            document.getElementById("inputNumber").readOnly = true;
+            document.getElementById("guessButton").disabled = true;
+
+            // Play again button
+            document.getElementById("playAgain").style.display = "initial";
+        }
+
+        function wonGame()
+        {
+            document.getElementById("validatingMsg").innerHTML = "Yayyyy, you WON";
+            document.getElementById("number").innerHTML = "The number is " + num;
+            document.getElementById("remainingGuesses").innerHTML = "You guessed it in "+ (totalGuesses-guessesLeft) +" guesses.";
+            document.getElementById("score").style.display = "initial";
+            document.getElementById("score").innerHTML = "Your score: "+ score;
+
+            // Making the textbox and button unclickable.
+            document.getElementById("inputNumber").readOnly = true;
+            document.getElementById("guessButton").disabled = true;
+
+            // Play again button
+            document.getElementById("playAgain").style.display = "initial";
+        }
+
+        function guess()
+        {
+            console.log(num)
+            guessesLeft = guessesLeft- 1;
+            if(guessesLeft+1 > 0)
+            {
+                let guessedVal = parseInt(document.getElementById("inputNumber").value);
+                if(guessesLeft == 0)
+                {
+                    lostGame();
+                }
+                if(num == guessedVal)
+                {
+                    wonGame();
+                }
+                else
+                {
+                    if(num < guessedVal)
+                    {
+                        document.getElementById("validatingMsg").innerHTML = "OOPS! The number is less than "+guessedVal;
+                    }
+                    if(num > guessedVal)
+                    {
+                        document.getElementById("validatingMsg").innerHTML = "OOPS! The number is greater than "+guessedVal;
+                    }
+                    document.getElementById("remainingGuesses").innerHTML = "Remaining Tries: "+ (guessesLeft);
+                    document.getElementById("inputNumber").value = "";
+                    document.getElementById("inputNumber").focus();   
+                }
+            }
+            else
+            {
+                lostGame();
+            }
+            score -= 100;
+        }
+
+        
+        function pageRefresh()
+        {
+            document.location.reload();
+        }   
+    </script>
+
+</body>
+</html>

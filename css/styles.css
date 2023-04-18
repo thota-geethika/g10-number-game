@@ -1,0 +1,105 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-color: rgb(179, 241, 241);
+}
+
+#difficulty-level,#container{
+    background-image: linear-gradient(to right,rgb(241, 158, 158),rgb(91, 250, 250));
+    border-radius: 2.5%;
+}
+
+#container{
+    border: 1px solid black;
+    padding: 2% 5%;
+    width: 40%;
+    margin: 0.5% auto;
+    text-align: center;
+    
+    
+}
+
+.makeDisplayNone{
+    
+    display: none;
+}
+
+#difficulty-level{
+    border: 1px solid black;
+    width: 40%;
+    padding: 5% 10% 3%;
+    margin: 12% auto;
+   
+}
+
+
+#levels-container{
+    display: flex;
+    justify-content: space-around;
+    /* border: 1px solid black; */
+    padding: 7% 0;
+    
+}
+
+#choose-msg{
+    text-align: center;
+}
+
+.score-display-text{
+    font-size: larger;
+    border: 1px solid black;
+    padding: 2%;
+    font-weight: 600;
+    /* background-color: rgb(252, 212, 212); */
+    background-image: linear-gradient( to right, rgba(229, 250, 152, 0.637),rgba(208, 195, 238, 0.829));
+    border-radius: 50%;
+    width: 30%;
+    text-align: center;
+}
+
+
+
+p{
+    font-size: 125%;
+}
+
+button{
+    font-size: larger;
+    padding: 2%;
+    border-radius: 10%;
+    background-color: rgb(212, 204, 204);
+    box-shadow: 2px 2px 2px 2px rgb(49, 49, 49);
+}
+
+button:hover{
+    background-color: rgb(252, 246, 246);
+    
+}
+
+#guessButton, #playAgain{
+    width: 30%;
+}
+
+
+#inputNumber{
+    width: 15%;
+    height: 80px;
+    margin: 2% auto;
+    border: solid black 2px;
+    font-size: 200%;
+    text-align: center;
+    border-radius: 8%;
+}
+
+.addStyles{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
